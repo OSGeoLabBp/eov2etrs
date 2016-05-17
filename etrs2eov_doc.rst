@@ -13,7 +13,7 @@ használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**
 A javítórácsokat letöltheti a honlapunkról (`vízszintes koordinátákhoz tartozó
 <http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
 tartozó <http://www.geod.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
-és a saját gépén is használhatja. A `GitHub oldalunkról` <https://github.com/OSGeoLabBp/eov2etrs>`_ is letöltheti a javító rácsokat és a dokumentációt.
+és a saját gépén is használhatja. A `GitHub oldalunkról <https://github.com/OSGeoLabBp/eov2etrs>`_ is letöltheti a javító rácsokat és a dokumentációt.
 
 Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
