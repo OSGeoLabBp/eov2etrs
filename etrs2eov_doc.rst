@@ -35,7 +35,7 @@ Proj.4 egyik könyvtárába kell bemásolni. Linux operációs rendszer esetén 
 
     /usr/share/proj
     
-könyvtár. Ebben a könyvtárban található az *epsg* fájl is, mely a vetületek definícióját tartalamazza.
+könyvtár. Ebben a könyvtárban található az *epsg* fájl is, mely a vetületek definícióját tartalmazza.
 Ennek tartalmát is módosítani kell, hogy például a cs2cs segédprogram a javító rácsokat figyelembe vegye.
 A dokumentációban később talál leírást a felhasználásról az egyes térinformatikai programokban.
 
