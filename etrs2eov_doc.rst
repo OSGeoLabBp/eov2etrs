@@ -10,7 +10,9 @@ Az átszámítás pontosítása érdekében a proj.4 programkönyvtár által
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
 (proj.4 segédprogram), az **ogr2ogr** (OGR segédprogram) és más proj.4 könyvtárat
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
-A javítórácsokat letöltheti a honlapunkról (`vízszintes koordinátákhoz tartozó
+A javítórácsokat letöltheti a honlapunkról, a `GitHub oldalunkról 
+<https://github.com/OSGeoLabBp/eov2etrs>`_, és a `Proj4 projekt honlapjáról
+<http://proj4.org/grids.html#hungary>_` (`vízszintes koordinátákhoz tartozó
 <http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
 tartozó <http://www.geod.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
 és a saját gépén is használhatja. A `GitHub oldalunkról <https://github.com/OSGeoLabBp/eov2etrs>`_ is letöltheti a javító rácsokat és a dokumentációt.
