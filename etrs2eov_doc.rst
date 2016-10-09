@@ -15,8 +15,7 @@ A javítórácsokat letöltheti a honlapunkról, a `GitHub oldalunkról
 <http://proj4.org/grids.html#hungary>_` (`vízszintes koordinátákhoz tartozó
 <http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
 tartozó <http://www.geod.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
-és a saját gépén is használhatja. A `GitHub oldalunkról <https://github.com/OSGeoLabBp/eov2etrs>`_ is letöltheti a javító rácsokat és a dokumentációt.
-
+és a saját gépén is használhatja.
 Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
 között.
