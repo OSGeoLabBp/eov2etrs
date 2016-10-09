@@ -27,6 +27,18 @@ hosszúság és szélesség értékek nem változnak az időben. A WGS84 és az 
 rendszerek 1989-ben egybeestek, azóta több mint fél méter eltérés alakult ki
 köztük.
 
+Telepítés
+---------
+
+A rács fájlok telepítéséhez nincs külön telepítő program. A letöltött fájlokat a
+Proj.4 egyik könyvtárába kell bemásolni. Linux operációs rendszer esetén ez a::
+
+    /usr/share/proj
+    
+könyvtár. Ebben a könyvtárban található az *epsg* fájl is, mely a vetületek definícióját tartalamazza.
+Ennek tartalmát is módosítani kell, hogy például a cs2cs segédprogram a javító rácsokat figyelembe vegye.
+A dokumentációban később talál leírást a felhasználásról az egyes térinformatikai programokban.
+
 Közvetlen használat a böngészőben
 ---------------------------------
 
@@ -122,8 +134,9 @@ OSGeo4W telepítővel telepíthetik. Segítségével a billentyűzetről bevitt 
 fájlban tárolt pontokat számíthatunk át a Proj.4 könyvtár által támogatott
 vetületek, koordináta-rendszerek között. A Proj.4 része a vetületi definíciókat
 tartalmazó *epsg* szöveg fájl. Ezt linux rendszereken az /usr/share/proj 
-könyvtárban találhatjuk meg. Az alábbi példák akkor működnek helyesen, ha a
-következő definíció áll az *epsg* fájlban (nincs +towgs!)::
+könyvtárban találhatjuk meg, ebbe a könyvtárba kell bemásolni a letöltött
+javító rácsokat is. Az alábbi példák akkor működnek helyesen, ha a
+következő definíció áll az *epsg* fájlban (*nincs +towgs!*)::
 
     <23700> +proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +units=m +no_defs  <>
 
