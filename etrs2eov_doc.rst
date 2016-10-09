@@ -6,12 +6,12 @@ Az **ETRS89** földrajzi koordináták (hosszúság és szélesség, ellipszoid 
 közötti átszámításra a nyílt forráskódú szoftverek is alkalmasak, de különböző
 technikai okok miatt ennek a pontossága néhány méteres csak. 
 
-Az átszámítás pontosítása érdekében a proj.4 programkönyvtár által 
+Az átszámítás pontosítása érdekében a Proj.4 programkönyvtár által 
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
-(proj.4 segédprogram), az **ogr2ogr** (OGR segédprogram) és más proj.4 könyvtárat
+(proj.4 segédprogram), az **ogr2ogr** (OGR segédprogram) és más Proj.4 könyvtárat
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
 A javítórácsokat letöltheti a honlapunkról, a `GitHub oldalunkról 
-<https://github.com/OSGeoLabBp/eov2etrs>`_, és a `Proj4 projekt honlapjáról
+<https://github.com/OSGeoLabBp/eov2etrs>`_, és a `Proj.4 projekt honlapjáról
 <http://proj4.org/grids.html#hungary>_` (`vízszintes koordinátákhoz tartozó
 <http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
 tartozó <http://www.geod.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
