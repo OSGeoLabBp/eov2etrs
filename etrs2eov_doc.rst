@@ -190,13 +190,14 @@ Használat a QGIS programban
 ---------------------------
 
 A QGIS program a vetületi definíciókat **srs.db** SQLite adatbázisban tárolja. 
-Az srs.db fájlt /usr/share/qgis könyvtárban találjuk a Linux rendszereken.
+Az srs.db fájlt */usr/share/qgis/resources* könyvtárban találjuk a Linux rendszereken.
 Ezt módosíthatjuk az sqlite3 adatbázis kezelőben az alábbi SQL paranccsal::
 
     UPDATE tbl_srs SET parameters='+proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs' WHERE srid=23700;
    
 Emellett saját vetület létrehozása esetén nem kell az SQLite adatbázist 
-módosítani. A Beállítások/Egyéni vetület menüpont biztosítja a saját vetület 
+módosítani. Bár ilyenkor a 23700 EPSG kód helyett a saját vetület kódját kell használni,
+ami zavart okozhat. A Beállítások/Egyéni vetület menüpont biztosítja a saját vetület 
 bevitelét.
 
 Használat PostGIS programban
