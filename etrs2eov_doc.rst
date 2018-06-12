@@ -165,6 +165,16 @@ Ezután nem kell megadni a parancs sorban a rács fájlokat::
 Az átszámítást elvégezhetjük a teljes vetületi definíció megadásával a parancssorban::
 
      cs2cs +proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs +to +init=epsg:4258
+     
+A számítást fájlban tárolt koordinátákkal is elvégezhetjük az input és az output átirányításával. Az input fájlban csak a koordináták szerepelhetnek (pontszám nem). Például, ha az *epsg* fájlban szereplő definícióban megadtuk a javító rácsokat, akkor az eov.txt fájlban szereplő EOV koordinátákat::
+
+    654234.12 256981.34 105.65
+    656521.88 249547.33 126.68
+    678213.76 242156.44 162.12
+    
+a következő paranccsal számíthatjuk át ETRS89-be, az etrs.txt fájlba::
+
+    cs2cs +init=epsg:23700 +to +init=epsg:4258 < eov.txt > etrs.txt
 
 A beállításokat ellenőrizhetjük akár a webes alkalmazásunk (http://www.geod.bme.hu/on_line/etrs2eov),
 akár akár az EHT2014 (http://gnssnet.hu/EHTClient/) szolgáltatás segítségével.
