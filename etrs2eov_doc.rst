@@ -71,7 +71,7 @@ tetszőleges további adatok szerepelhetnek, ezeket az átszámítás figyelmen 
 értékek megadásánál tizedes vesszőt és tizedes pontot is használhat.
 
 Az átszámítás eredménye egy új lapon jelenik meg. Az első oszlopban a
-pontszám, a második oszlopban a hoszzúság, illetve az EOV Y koordináta, a
+pontszám, a második oszlopban a hosszúság, illetve az EOV Y koordináta, a
 harmadik oszlopban a szélesség, illetve az EOV X koordináta jelenik meg. Ha a bemenő adatok között 
 megadtuk az ellipszodi, illetve a tengerszint feletti magasságot, akkor az átszámított magasság az 
 eredményében is megjelenik.
