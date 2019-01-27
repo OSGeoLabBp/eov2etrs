@@ -12,7 +12,7 @@ használható javító rácsokat hoztunk létre. A javító rács használható 
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
 A javítórácsokat letöltheti a honlapunkról, a `GitHub oldalunkról 
 <https://github.com/OSGeoLabBp/eov2etrs>`_, és a `Proj.4 projekt honlapjáról
-<http://proj4.org/grids.html#hungary>_` (`vízszintes koordinátákhoz tartozó
+<https://proj4.org/resource_files.html#hungary>`_ (`vízszintes koordinátákhoz tartozó
 <http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
 tartozó <http://www.geod.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
 és a saját gépén is használhatja.
