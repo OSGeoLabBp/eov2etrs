@@ -177,7 +177,7 @@ a következő paranccsal számíthatjuk át ETRS89-be, az etrs.txt fájlba::
     cs2cs +init=epsg:23700 +to +init=epsg:4258 < eov.txt > etrs.txt
 
 A beállításokat ellenőrizhetjük akár a webes alkalmazásunk (http://www.agt.bme.hu/on_line/etrs2eov),
-akár akár az EHT2014 (http://gnssnet.hu/EHTClient/) szolgáltatás segítségével.
+akár akár az EHT2014 (http://eht.gnssnet.hu/index.php/site/coordByKeyIn) szolgáltatás segítségével.
 
 Használat az ogr2ogr segédprogramban
 ------------------------------------
