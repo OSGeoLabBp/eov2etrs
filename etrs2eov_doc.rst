@@ -12,9 +12,9 @@ használható javító rácsokat hoztunk létre. A javító rács használható 
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
 A javítórácsokat letöltheti a honlapunkról, a `GitHub oldalunkról 
 <https://github.com/OSGeoLabBp/eov2etrs>`_, és a `Proj.4 projekt honlapjáról
-<http://proj4.org/grids.html#hungary>_` (`vízszintes koordinátákhoz tartozó
-<http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
-tartozó <http://www.geod.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
+<https://proj4.org/resource_files.html#hungary>`_ (`vízszintes koordinátákhoz tartozó
+<http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
+tartozó <http://www.agt.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
 és a saját gépén is használhatja.
 Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
@@ -42,7 +42,7 @@ A dokumentációban később talál leírást a felhasználásról az egyes tér
 Közvetlen használat a böngészőben
 ---------------------------------
 
-A http://www.geod.bme.hu/on_line/etrs2eov címen érhető el a böngészőből
+A http://www.agt.bme.hu/on_line/etrs2eov címen érhető el a böngészőből
 használható átszámítás.
 
 .. image:: images/single.png
@@ -71,7 +71,7 @@ tetszőleges további adatok szerepelhetnek, ezeket az átszámítás figyelmen 
 értékek megadásánál tizedes vesszőt és tizedes pontot is használhat.
 
 Az átszámítás eredménye egy új lapon jelenik meg. Az első oszlopban a
-pontszám, a második oszlopban a hoszzúság, illetve az EOV Y koordináta, a
+pontszám, a második oszlopban a hosszúság, illetve az EOV Y koordináta, a
 harmadik oszlopban a szélesség, illetve az EOV X koordináta jelenik meg. Ha a bemenő adatok között 
 megadtuk az ellipszodi, illetve a tengerszint feletti magasságot, akkor az átszámított magasság az 
 eredményében is megjelenik.
@@ -100,11 +100,11 @@ A POST illetve GET kérések paraméterei:
 
 Például egy EOV koordinátákkal megadott pont átszámítását az alábbi URL megadásával is kezdeményezheti::
 
-    http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov.php?e=650000&n=240000&sfradio=single&format=TXT
+    http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov.php?e=650000&n=240000&sfradio=single&format=TXT
 
 Például egy EOV koordinátákkal, illetve Balti magassággal megadott pont átszámítását az alábbi URL megadásával is kezdeményezheti::
 
-    http://www.geod.bme.hu/on_line/etrs2eov/etrs2eov.php?e=650000&n=240000&h=150&sfradio=single&format=TXT
+    http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov.php?e=650000&n=240000&h=150&sfradio=single&format=TXT
 
 Python programból az alábbi módon érheti el a szolgáltatást (egy pont átszámítása):: 
 
@@ -176,8 +176,8 @@ a következő paranccsal számíthatjuk át ETRS89-be, az etrs.txt fájlba::
 
     cs2cs +init=epsg:23700 +to +init=epsg:4258 < eov.txt > etrs.txt
 
-A beállításokat ellenőrizhetjük akár a webes alkalmazásunk (http://www.geod.bme.hu/on_line/etrs2eov),
-akár akár az EHT2014 (http://gnssnet.hu/EHTClient/) szolgáltatás segítségével.
+A beállításokat ellenőrizhetjük akár a webes alkalmazásunk (http://www.agt.bme.hu/on_line/etrs2eov),
+akár akár az EHT2014 (http://eht.gnssnet.hu/index.php/site/coordByKeyIn) szolgáltatás segítségével.
 
 Használat az ogr2ogr segédprogramban
 ------------------------------------
