@@ -1,5 +1,5 @@
 # eov2etrs
-Transformation between Hungarian EOV and ETRS89 based on proj4 grids.
+Transformation between Hungarian EOV and ETRS89 based on proj grids.
 
 On-line test page: http://www.agt.bme.hu/on_line/etrs2eov/ (Hungarian).
 
