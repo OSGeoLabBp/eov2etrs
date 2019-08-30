@@ -6,15 +6,13 @@ Az **ETRS89** földrajzi koordináták (hosszúság és szélesség, ellipszoid 
 közötti átszámításra a nyílt forráskódú szoftverek is alkalmasak, de különböző
 technikai okok miatt ennek a pontossága néhány méteres csak. 
 
-Az átszámítás pontosítása érdekében a Proj.4 programkönyvtár által 
+Az átszámítás pontosítása érdekében a Proj programkönyvtár által 
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
 (proj.4 segédprogram), az **ogr2ogr** (OGR segédprogram) és más Proj.4 könyvtárat
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
-A javítórácsokat letöltheti a honlapunkról, a `GitHub oldalunkról 
-<https://github.com/OSGeoLabBp/eov2etrs>`_, és a `Proj.4 projekt honlapjáról
-<https://proj4.org/resource_files.html#hungary>`_ (`vízszintes koordinátákhoz tartozó
-<http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov_notowgs.gsb>`_, a `magasságokhoz 
-tartozó <http://www.agt.bme.hu/on_line/etrs2eov/geoid_eht2014.gtx>`_ )
+A javítórácsokat letöltheti a `GitHub oldalunkról 
+<https://github.com/OSGeoLabBp/eov2etrs>`_, a `Proj projekt honlapjáról
+<https://proj.org/resource_files.html#hungary>`
 és a saját gépén is használhatja.
 Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
@@ -64,10 +62,12 @@ GPX formátumok csak földrajzi koordinátákat tartalmazhatnak:
 
 Fájlban tárolt pontok átszámítása esetén soronként egy pont adatait kell
 megadni szóközzel, tabulátorral vagy pontosvesszővel elválasztva.
-Az első mezőbe a pontszámnak, utána pedig a két koordinátának, majd a magasságnak kell következnie.
+Az első mezőbe a pontszámnak, utána pedig a két koordinátának, majd a magasságnak kell következnie,
 A koordináták sorrendje felcserélhető a fájlban, például a szélesség megelőzheti
 a hosszúságot. A magasságok megadása nem kötelező, üres mező is lehet. A fájlban ezen három adat után 
-tetszőleges további adatok szerepelhetnek, ezeket az átszámítás figyelmen kívül hagyja. A numerikus
+tetszőleges további adatok szerepelhetnek, 
+melyek szintén átkerülnek az outputba.
+A numerikus
 értékek megadásánál tizedes vesszőt és tizedes pontot is használhat.
 
 Az átszámítás eredménye egy új lapon jelenik meg. Az első oszlopban a

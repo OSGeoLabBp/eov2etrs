@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<!--
+User interface to transform EOV <-> ETRS89 coordinates
+single point or several points from file
+
+Accepted file format (invalid lines are skipped) 
+point_id<separator>fi<separator>lambda<separator>optionally heigth above ellipsoid<separator>any other content in line
+or 
+point_id<separator>lambda<separator>fi<separator>optionally heigth above ellipsoid<separator>any other content in line
+or
+point_id<separator>EOVY<separator>EOVX<separator>optionally heigth above mean sea level<separator>any other content in line
+or
+point_id<separator>EOVX<separator>EOVY<separator>optionally heigth above mean sea level<separator>any other content in line
+
+valid separators are: <space> <tab> <semicolon>;
+
+-->
+<head>
+<meta charset="utf-8"/>
+<script language="javascript" type="text/javascript" src="./jquery-2.1.1.min.js">
+</script>
+<script language="javascript" type="text/javascript">
+
+function isReal(val) {
+	real = /^[+-]?[0-9]+([\.,][0-9]*)?$/;
+	return real.test(val);
+}
+
+jQuery(document).ready(function() {
+	// change label text
+	jQuery("#etrs2eovradio").change(
+		function(e) {
+			jQuery("#lambda").html("Lambda:");
+			jQuery("#fi").html("Fi:");
+			jQuery("#h_label").html("h:");
+			jQuery("#format option[value='KML']").remove();
+			jQuery("#format option[value='GPX']").remove();
+		}
+	);
+	jQuery("#eov2etrsradio").change(
+		function(e) {
+			jQuery("#lambda").html("EOV Y:");
+			jQuery("#fi").html("EOV X:");
+			jQuery("#h_label").html("H:");
+			jQuery("#format").append('<option value="KML">KML</option>');
+			jQuery("#format").append('<option value="GPX">GPX</option>');
+		}
+	);
+	jQuery("#singleradio").change(
+		function(e) {
+			jQuery("#file").hide();
+			jQuery("#fname").hide();
+			jQuery("#n").show();
+			jQuery("#e").show();
+			jQuery("#fi").show();
+			jQuery("#lambda").show();
+			jQuery("#h_label").show();
+			jQuery("#h").show();
+		}
+	);
+	jQuery("#fileradio").change(
+		function(e) {
+			jQuery("#file").show();
+			jQuery("#fname").show();
+			jQuery("#n").hide();
+			jQuery("#e").hide();
+			jQuery("#fi").hide();
+			jQuery("#lambda").hide();
+			jQuery("#h_label").hide();
+			jQuery("#h").hide();
+		}
+	);
+	// default ETRS -> EOV
+	jQuery("#etrs2eovradio").prop("checked", true);
+	// default single point
+	jQuery("#singleradio").prop("checked", true);
+	jQuery("#file").hide();
+	jQuery("#fname").hide();
+	// field check
+	jQuery("#etrs2eovform").submit(
+		function(ev) {
+			if (jQuery("#singleradio").prop('checked')) {
+				var e = jQuery("#e").val().trim().replace(',', '.');
+				var n = jQuery("#n").val().trim().replace(',', '.');
+				var h = jQuery("#h").val().trim().replace(',', '.');
+				jQuery("#e").val(e);
+				jQuery("#n").val(n);
+				jQuery("#h").val(h);
+				if (! isReal(e) || ! isReal(n) || (h.length > 0 && ! isReal(h))) {
+					alert("Hibas szam");
+					return false;
+				}
+				if (jQuery("#eov2etrsradio").prop('checked')) {
+					if (e*1 < 400000 || e*1 > 1100000 || n*1 < 0 || n*1 > 400000) {
+						// try exchange values
+						if (n*1 < 400000 || n*1 > 1100000 || e*1 < 0 || e*1 > 400000) {
+							alert("Hibás koordináta érték, tartományon kívül");
+							return false;
+						} else {
+							jQuery("#n").val(e);
+							jQuery("#e").val(n);
+						}
+					}
+				} else {
+					if (n*1 < 45.7 || n*1 > 48.7 || e*1 < 16 || e*1 > 23) {
+						// try exchange values
+						if (e*1 < 45.7 || e*1 > 48.7 || n*1 < 16 || n*1 > 23) {
+							alert("Hibás koordináta érték, tartományon kívül");
+							return false;
+						} else {
+							jQuery("#n").val(e);
+							jQuery("#e").val(n);
+						}
+					}
+				}
+			} else {
+				if (jQuery("#fname").val().length == 0) {
+					alert("Adjon meg egy fájlnevet");
+					return false;
+				}
+			}
+			return true;
+		}
+	);
+});
+
+</script>
+</head>
+<body>
+<h2>ETRS89 <--> EOV/Balti konverzió</h2>
+<form id="etrs2eovform" name="etrs2eovform" method="post" action="etrs2eov.php" enctype="multipart/form-data">
+<table name="etrs2eovtable" id="etrs2eovtable" border="0">
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td><input type="radio" name="sfradio" id="singleradio" value="single">Egy pont<br>
+		<input type="radio" name="sfradio" id="fileradio" value="file">Fájl</td>
+		<td><input type="radio" name="etrs2eovradio" id="eov2etrsradio" value="eov2etrscalc">EOV/Balti -> ETRS89<br>
+		<input type="radio" name="etrs2eovradio" id="etrs2eovradio" value="etrs2eovcalc">ETRS89 -> EOV/Balti</td> 
+	</tr>
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td id="lambda">Lambda:</td>
+		<td><input type="text" name="e" id="e" size="20"></td>
+	</tr>
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td id="fi">Fi:</td>
+		<td><input type="text" name="n" id="n" size="20"></td>
+	</tr>
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td id="h_label">h (opcionális):</td>
+		<td><input type="text" name="h" id="h" size="20"></td>
+	</tr>
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td id="file">Input fájl:</td>
+		<td><input type="file" name="fname" id="fname" size="60"></td>
+	</tr>
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td>Formátum:</td>
+		<td>
+		<select id="format" name="format">
+			<option value="TXT">TXT</option>
+		</select>
+		</td>
+	</tr>
+	<tr name="etrs2eovtr" id="etrs2eovtr">
+		<td><a href="etrs2eov_doc.html">Dokumentáció</a></td>
+		<td align="right"><input type="submit" value="Küld"></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
