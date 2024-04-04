@@ -8,4 +8,4 @@
 
 4.	Navigáljon a C:\Program Files (x86)\ArcGIS\CoordinateSystemsData\pedata\geographic\europe mappába és itt hozzon létre egy „hungary” almappát, majd másolja ebbe a mappába az „etrs2eov_notowgs.gsb” fájlt!
 
-5.	Másolja a C:\Users\<saját felhasználónév>\AppData\Roaming\Esri\ArcGISPro\ArcToolbox\CustomTransformations mappába másolja az „ETRS_1989_To_EOMA_1980_Custom_EHT2014_Geoid.vtf” és a „Hungarian_1972_To_ETRS_1989_Custom_NTv2.gtf” fájlokat.
+5.	Másolja a C:\Users\\<saját felhasználónév>\AppData\Roaming\Esri\ArcGISPro\ArcToolbox\CustomTransformations mappába másolja az „ETRS_1989_To_EOMA_1980_Custom_EHT2014_Geoid.vtf” és a „Hungarian_1972_To_ETRS_1989_Custom_NTv2.gtf” fájlokat.
