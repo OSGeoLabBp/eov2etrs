@@ -3,39 +3,47 @@ ETRS89 <-> EOV/Balti átszámítás
 
 Az **ETRS89** földrajzi koordináták (hosszúság és szélesség, ellipszoid feletti magasság)
 és az **EOV** koordináták, illetve **Balti** magasság
-közötti átszámításra a nyílt forráskódú szoftverek is alkalmasak, de különböző
-technikai okok miatt ennek a pontossága néhány méteres csak. 
-
-Az átszámítás pontosítása érdekében a Proj programkönyvtár által 
+közötti átszámítását kezdetben a legtöbb szoftver deciméter pontosan tudta csak elvégezni, mert az országosan egységes paraméterekkel végzett hasonlósági transzformáció ennyire pontos a klasszikus geodéziai alapponthálózatok kerethibái miatt. Az átszámítás pontosítása érdekében a Proj programkönyvtár által 
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
-(proj.4 segédprogram), az **ogr2ogr** (OGR segédprogram) és más Proj.4 könyvtárat
+(proj segédprogram), az **ogr2ogr** (OGR segédprogram) és más Proj könyvtárat
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
 A javítórácsokat letöltheti a `GitHub oldalunkról 
 <https://github.com/OSGeoLabBp/eov2etrs>`_, a `Proj projekt honlapjáról
-<https://proj.org/resource_files.html#hungary>`
-és a saját gépén is használhatja.
+<https://proj.org/resource_files.html#hungary>` is.
 Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
 között.
 
-Miért nem WGS84 koordinátákra készítettük el az átszámítást?
-Az európai kontinens mozgása miatt a WGS84 koordináták időben változnak, az
-európai referencia rendszer (ETRS89) a kontinenssel együtt mozog, így a
-hosszúság és szélesség értékek nem változnak az időben. A WGS84 és az ETRS89 
-rendszerek 1989-ben egybeestek, azóta több mint fél méter eltérés alakult ki
-köztük.
-
 Telepítés
 ---------
 
-A rács fájlok telepítéséhez nincs külön telepítő program. A letöltött fájlokat a
-Proj.4 egyik könyvtárába kell bemásolni. Linux operációs rendszer esetén ez a::
+A rácsfájlok bekerültek a proj 9.5.1 változatába és a hozzá tartozó proj_data 1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre, ezért érdemes a proj könyváturnkat frissíteni.
 
-    /usr/share/proj
-    
-könyvtár. Ebben a könyvtárban található az *epsg* fájl is, mely a vetületek definícióját tartalmazza.
-Ennek tartalmát is módosítani kell, hogy például a cs2cs segédprogram a javító rácsokat figyelembe vegye.
-A dokumentációban később talál leírást a felhasználásról az egyes térinformatikai programokban.
+Használat cs2cs segédprogramban
+-------------------------------
+
+A cs2cs (Coordinate System to Coordinate System) a Proj 
+programcsomaghoz tartozó parancssori segédprogram.  Windows felhasználók például a
+OSGeo4W telepítővel telepíthetik. Segítségével a billentyűzetről bevitt vagy 
+fájlban tárolt pontokat számíthatunk át a Proj könyvtár által támogatott
+vetületek, koordináta-rendszerek között. Az átszámításokat az alábbi példák alapján végezhetjük::
+
+    cs2cs -f "%.9f" +init=epsg:10660 +to +init=epsg:7931
+    650000.000 240000.000 150.000
+Eredményül a következőket fogjuk kapni::
+
+19.047447408    47.503933139 193.688921426
+
+Ellenkező irányban::
+
+    cs2cs -f "%.3f" +init=epsg:7931 +to +init=epsg:10660
+    19.047447408    47.503933139 193.688921426
+Eredményül mm pontosan vissza fogjuk kapni az eredeti koordinátákat és magasságot::
+
+    650000.000      240000.000 150.000
+
+Az eredményeket ellenőrizhetjük akár a webes alkalmazásunk (http://www.agt.bme.hu/on_line/etrs2eov),
+akár akár az EHT2014 (https://eht2.gnssnet.hu/) szolgáltatás segítségével.
 
 Közvetlen használat a böngészőben
 ---------------------------------
@@ -125,59 +133,7 @@ vagy::
     >>> print res.read()
     1 19.0474474 47.5039331
 
-Használat cs2cs segédprogramban
--------------------------------
 
-A cs2cs (Coordinate System to Coordinate System) a Proj.4 
-programcsomaghoz tartozó parancssori segédprogram.  Windows felhasználók például a
-OSGeo4W telepítővel telepíthetik. Segítségével a billentyűzetről bevitt vagy 
-fájlban tárolt pontokat számíthatunk át a Proj.4 könyvtár által támogatott
-vetületek, koordináta-rendszerek között. A Proj.4 része a vetületi definíciókat
-tartalmazó *epsg* szöveg fájl. Ezt linux rendszereken az /usr/share/proj 
-könyvtárban találhatjuk meg, ebbe a könyvtárba kell bemásolni a letöltött
-javító rácsokat is. Az alábbi példák akkor működnek helyesen, ha a
-következő definíció áll az *epsg* fájlban (*nincs +towgs!*)::
-
-    <23700> +proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +units=m +no_defs  <>
-
-A javító rács használatát EOV/Balti -> ETRS89
-átszámítás esetén a következő paranccsal kezdeményezhetjük::
-
-   cs2cs -f "%.7f" +init=epsg:23700 +nadgrids=etrs2eov_notowgs.gsb +geoidgrids=geoid_eht2014.gtx +to +init=epsg:4258
-
-Ezután a billentyűzetről vihetjük be az átszámítandó pontok koordinátáit 
-soronként, szóközzel elválasztva. Két vagy három koordinátát adhatunk meg.
-Fájlban tárolt pontokat a standard input átírányításával dolgozhatunk fel. 
-Az eredményeket fájlba írhatjuk a standard output átirányításával.
-
-A fordított irányú átszámítást a következő paranccsal indíthatjuk::
-
-    cs2cs +init=epsg:4258 +to +init=epsg:23700 +nadgrids=etrs2eov_notowgs.gsb +geoidgrids=geoid_eht2014.gtx
-
-Az *epsg* fájl módosíthatjuk, hogy a javító rácsot se kelljen megadni a parancssorban::
-
-    <23700> +proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +geoidgrids=geoid_eht2014.gtx +units=m +no_defs  <>
-
-Ezután nem kell megadni a parancs sorban a rács fájlokat::
-
-    cs2cs +init=epsg:4258 +to +init=epsg:23700
-
-Az átszámítást elvégezhetjük a teljes vetületi definíció megadásával a parancssorban::
-
-     cs2cs +proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs +to +init=epsg:4258
-     
-A számítást fájlban tárolt koordinátákkal is elvégezhetjük az input és az output átirányításával. Az input fájlban csak a koordináták szerepelhetnek (pontszám nem). Például, ha az *epsg* fájlban szereplő definícióban megadtuk a javító rácsokat, akkor az eov.txt fájlban szereplő EOV koordinátákat::
-
-    654234.12 256981.34 105.65
-    656521.88 249547.33 126.68
-    678213.76 242156.44 162.12
-    
-a következő paranccsal számíthatjuk át ETRS89-be, az etrs.txt fájlba::
-
-    cs2cs +init=epsg:23700 +to +init=epsg:4258 < eov.txt > etrs.txt
-
-A beállításokat ellenőrizhetjük akár a webes alkalmazásunk (http://www.agt.bme.hu/on_line/etrs2eov),
-akár akár az EHT2014 (http://eht.gnssnet.hu/index.php/site/coordByKeyIn) szolgáltatás segítségével.
 
 Használat az ogr2ogr segédprogramban
 ------------------------------------
