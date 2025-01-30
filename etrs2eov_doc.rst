@@ -159,6 +159,8 @@ vagy::
 Használat az ogr2ogr segédprogramban
 ------------------------------------
 
+**MÉG NEM AKTUALIZÁLT RÉSZ A ÚJ VÁLTOZATHOZ**
+
 Az **ogr2ogr** a GDAL/OGR könyvtárhoz készült segédprogramok egyike. 
 Segítségével különböző vektoros formátumok között alakíthatjuk át a 
 térinformatikai állományainkat és vetületi átszámítást is végrehajthatunk 
@@ -175,6 +177,8 @@ Vigyázat, a parancsor végén először a cél állomány kell megadni és utá
 
 Használat PostGIS programban
 ----------------------------
+
+**MÉG NEM AKTUALIZÁLT RÉSZ A ÚJ VÁLTOZATHOZ**
 
 A PostGIS a vetületi definíciókat a **spatial_ref_sys** táblában tárolja. 
 Ennek tartalmát kell aktualizálnunk az EOV vetületre::
