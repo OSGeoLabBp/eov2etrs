@@ -1,14 +1,18 @@
-ETRS89 <-> EOV/Balti átszámítás
-===============================
+ETRF2000/ETRS89 <-> EOV/Balti átszámítás
+========================================
 
-Az **ETRS89** földrajzi koordináták (hosszúság és szélesség, ellipszoid feletti magasság)
-és az **EOV** koordináták, illetve **Balti** magasság
-közötti átszámítását kezdetben a legtöbb szoftver deciméter pontosan tudta csak elvégezni, mert az országosan egységes paraméterekkel végzett hasonlósági transzformáció ennyire pontos a klasszikus geodéziai alapponthálózatok kerethibái miatt. Az átszámítás pontosítása érdekében a Proj programkönyvtár által 
+Az **ETRF2000/ETRS89** földrajzi koordináták (hosszúság és szélesség,
+ellipszoid feletti magasság) és az **EOV** koordináták, illetve **Balti**
+magasság közötti átszámítását kezdetben a legtöbb szoftver deciméter pontosan
+tudta csak elvégezni, mert az országosan egységes paraméterekkel végzett
+hasonlósági transzformáció ennyire pontos a klasszikus geodéziai 
+alapponthálózatok kerethibái miatt. Az átszámítás pontosítása érdekében a PROJ
+programkönyvtár által 
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
-(proj segédprogram), az **ogr2ogr** (OGR segédprogram) és más Proj könyvtárat
+(PROJ segédprogram), az **ogr2ogr** (OGR segédprogram) és más PROJ könyvtárat
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
 A javítórácsokat letöltheti a `GitHub oldalunkról 
-<https://github.com/OSGeoLabBp/eov2etrs>`_, a `Proj projekt honlapjáról
+<https://github.com/OSGeoLabBp/eov2etrs>`_, illetve a `PROJ projekt honlapjáról
 <https://proj.org/resource_files.html#hungary>` is.
 Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
@@ -17,24 +21,35 @@ között.
 Telepítés
 ---------
 
-A rácsfájlok bekerültek a proj 9.5.1 változatába és a hozzá tartozó proj_data 1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre, ezért érdemes a proj könyvátrunkat frissíteni.
+A rácsfájlok bekerültek a PROJ 9.5.1 változatába és a hozzá tartozó PROJ-data
+1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre,s
+ezért érdemes a PROJ könyvátrunkat frissíteni.
+
+A korábbi programváltozatokhoz lásd a régebbi leírást: 
+https://github.com/OSGeoLabBp/eov2etrs/blob/master/old_etrs2eov_doc.rst
 
 Használat a QGIS programban
 ---------------------------
 
-A QGIS program 3.40-es válozata már a proj 9.5.1 verzióját használja, ezért a QGIS 3.40+ verzióiban az általunk elkészített és publikált rácshálók automatikusan bekerülnek. A projekt, illetve rétegek koordináta-rendszerét érdemes 10660 EPSG kódra állítani, és akkor az EOV vetületre végzett átszámítás cm-es pontossággal végezhető.
+A QGIS program 3.40-es válozata már a proj 9.5.1 verzióját használja, ezért a
+QGIS 3.40+ verzióiban az általunk elkészített és publikált rácshálók
+automatikusan bekerülnek. A projekt, illetve rétegek koordináta-rendszerét
+érdemes 10660 EPSG kódra állítani, és akkor az EOV vetületre végzett átszámítás
+cm-es pontossággal végezhető.
 
 Használat cs2cs segédprogramban
 -------------------------------
 
-A cs2cs (Coordinate System to Coordinate System) a Proj 
-programcsomaghoz tartozó parancssori segédprogram.  Windows felhasználók például a
-OSGeo4W telepítővel telepíthetik. Segítségével a billentyűzetről bevitt vagy 
-fájlban tárolt pontokat számíthatunk át a Proj könyvtár által támogatott
-vetületek, koordináta-rendszerek között. Az átszámításokat az alábbi példák alapján végezhetjük::
+A cs2cs (Coordinate System to Coordinate System) a PROJ 
+programcsomaghoz tartozó parancssori segédprogram.  Windows felhasználók
+például a OSGeo4W telepítővel telepíthetik. Segítségével a billentyűzetről
+bevitt vagy fájlban tárolt pontokat számíthatunk át a PROJ könyvtár által
+támogatott vetületek, koordináta-rendszerek között. Az átszámításokat az alábbi
+példák alapján végezhetjük::
 
     cs2cs -f "%.9f" +init=epsg:10660 +to +init=epsg:7931
     650000.000 240000.000 150.000
+
 Eredményül a következőket fogjuk kapni::
 
 19.047447408    47.503933139 193.688921426
@@ -43,12 +58,13 @@ Ellenkező irányban::
 
     cs2cs -f "%.3f" +init=epsg:7931 +to +init=epsg:10660
     19.047447408    47.503933139 193.688921426
+
 Eredményül mm pontosan vissza fogjuk kapni az eredeti koordinátákat és magasságot::
 
     650000.000      240000.000 150.000
 
 Az eredményeket ellenőrizhetjük akár a webes alkalmazásunk (http://www.agt.bme.hu/on_line/etrs2eov),
-akár akár az EHT2014 (https://eht2.gnssnet.hu/) szolgáltatás segítségével.
+vagy az EHT2014 (https://eht2.gnssnet.hu/) szolgáltatás segítségével.
 
 Közvetlen használat a böngészőben
 ---------------------------------
@@ -60,14 +76,15 @@ használható átszámítás.
    :align: right
 
 Az egymás alatti rádiógombok tartoznak össze, az *Egy pont* és a *Fájl*
-opció közötti váltás esetén az űrlap mezők megváltoznak, a két koordináta és a magasság
-megadását lehetővé tevő két input mező helyett egy fájl kiválasztó
-mező jelenik meg. Az *EOV/Balti->ETR89* illetve az *ETRS89->EOV/Balti* átszámítási irány
-módosítása esetén a koordináta mezők előtti feliratok változnak meg.
+opció közötti váltás esetén az űrlap mezők megváltoznak, a két koordináta és a
+magasság megadását lehetővé tevő két input mező helyett egy fájl kiválasztó
+mező jelenik meg. Az *EOV/Balti->ETR89* illetve az *ETRS89->EOV/Balti*
+átszámítási irány módosítása esetén a koordináta mezők előtti feliratok
+változnak meg.
 
 A *Formátum* mező az átszámítás eredményének formátumát befolyásolja. Csak az 
-*EOV/Balti->ETRS89* átszámítás esetén válaszhat több formátum között, mivel a KML és a
-GPX formátumok csak földrajzi koordinátákat tartalmazhatnak:
+*EOV/Balti->ETRS89* átszámítás esetén válaszhat több formátum között, mivel a
+KML és a GPX formátumok csak földrajzi koordinátákat tartalmazhatnak:
 
 * TXT szóközzel elválasztva jelenik meg a pontszám és a két koordináta illetve a magasság
 * KML különböző térinformatikai programokban használható formátum (pl. Google Earth, QGIS, stb.)
@@ -75,28 +92,29 @@ GPX formátumok csak földrajzi koordinátákat tartalmazhatnak:
 
 Fájlban tárolt pontok átszámítása esetén soronként egy pont adatait kell
 megadni szóközzel, tabulátorral vagy pontosvesszővel elválasztva.
-Az első mezőbe a pontszámnak, utána pedig a két koordinátának, majd a magasságnak kell következnie,
+Az első mezőbe a pontszámnak, utána pedig a két koordinátának, majd a
+magasságnak kell következnie,
 A koordináták sorrendje felcserélhető a fájlban, például a szélesség megelőzheti
-a hosszúságot. A magasságok megadása nem kötelező, üres mező is lehet. A fájlban ezen három adat után 
-tetszőleges további adatok szerepelhetnek, 
+a hosszúságot. A magasságok megadása nem kötelező, üres mező is lehet. A
+fájlban ezen három adat után tetszőleges további adatok szerepelhetnek, 
 melyek szintén átkerülnek az outputba.
-A numerikus
-értékek megadásánál tizedes vesszőt és tizedes pontot is használhat.
+A numerikus értékek megadásánál tizedes vesszőt és tizedes pontot is használhat.
 
 Az átszámítás eredménye egy új lapon jelenik meg. Az első oszlopban a
 pontszám, a második oszlopban a hosszúság, illetve az EOV Y koordináta, a
-harmadik oszlopban a szélesség, illetve az EOV X koordináta jelenik meg. Ha a bemenő adatok között 
-megadtuk az ellipszodi, illetve a tengerszint feletti magasságot, akkor az átszámított magasság az 
-eredményében is megjelenik.
-Egy pont átszámítása esetén mindig egyes pontszám jelenik meg. Az átszámítás eredményekben mindig
-tizedes pontot használ a program, attól függetlenül, hogy mi volt az input adatokban.
+harmadik oszlopban a szélesség, illetve az EOV X koordináta jelenik meg. Ha a
+bemenő adatok között megadtuk az ellipszoidi, illetve a tengerszint feletti
+magasságot, akkor az átszámított magasság az eredményében is megjelenik.
+Egy pont átszámítása esetén mindig egyes pontszám jelenik meg. Az átszámítás
+eredményeiben mindig tizedes pontot használ a program, attól függetlenül, hogy
+mi volt az input adatokban.
 Az eredményeket a böngésző program segítségével fájlba mentheti és más
 programokban felhasználhatja.
 
 Fájlban tárolt adatok átszámítása esetén a fájl méret maximum 15 MB lehet.
 
-Az általunk készített javítórácsok segítségével az átszámítás 1 cm-en belül megegyzik az EHT2014 
-szolgáltatással végzett átszámítással.
+Az általunk készített javítórácsok segítségével az átszámítás 1 cm-en belül
+megegyzik az EHT2014 szolgáltatással végzett átszámítással.
 
 WEB-es szolgáltatás használata saját környezetből
 -------------------------------------------------
@@ -121,24 +139,22 @@ Például egy EOV koordinátákkal, illetve Balti magassággal megadott pont át
 
 Python programból az alábbi módon érheti el a szolgáltatást (egy pont átszámítása):: 
 
-    >>> import urllib
-    >>> req = urllib.urlopen('http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov.php?e=650000&n=240000&sfradio=single&format=TXT').read()
-    >>> print req
-    1 19.0474474 47.5039331
+    >>> import urllib.request
+    >>> req = urllib.request.urlopen('http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov.php?e=650000&n=240000&sfradio=single&format=TXT').read()
+    >>> printr(req)
+    b'1 19.0474474 47.5039331\n'
 
 vagy::
     
-    >>> import urllib
-    >>> import urllib2
+    >>> import urllib.parse
+    >>> import urllib3
     >>> url = 'http://www.agt.bme.hu/on_line/etrs2eov/etrs2eov.php'
     >>> val = { 'e' : 650000, 'n' : 240000, 'sfradio' : 'single', 'format' : 'TXT' }
-    >>> data = urllib.urlencode(val)
-    >>> req = urllib2.Request(url, data)
-    >>> res = urllib2.urlopen(req)
-    >>> print res.read()
-    1 19.0474474 47.5039331
-
-
+    >>> data = urllib.parse.urlencode(val)
+    >>> http = urllib3.PoolManager()
+    >>> res = http.request('POST', url, body=data)
+    >>> print(res.read())
+    b'1 19.0474474 47.5039331'
 
 Használat az ogr2ogr segédprogramban
 ------------------------------------
