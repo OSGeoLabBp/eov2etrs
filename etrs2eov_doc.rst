@@ -31,8 +31,8 @@ https://github.com/OSGeoLabBp/eov2etrs/blob/master/old_etrs2eov_doc.rst
 Használat a QGIS programban
 ---------------------------
 
-A QGIS program 3.40-es válozata már a proj 9.5.1 verzióját használja, ezért a
-QGIS 3.40+ verzióiban az általunk elkészített és publikált rácshálók
+A QGIS program 3.40.3-es és 3.34.15-ös válozata már a proj 9.5.1 verzióját használja, ezért
+ezekben a verziókban az általunk elkészített és publikált rácshálók
 automatikusan bekerülnek. A projekt, illetve rétegek koordináta-rendszerét
 érdemes 10660 EPSG kódra állítani, és akkor az EOV vetületre végzett átszámítás
 cm-es pontossággal végezhető.
