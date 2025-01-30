@@ -30,6 +30,6 @@ These grids are useable also. It is not recomended to use them above proj 9.5.1.
 
 **etrs2eov_notowgs.gsb**
 
-## OMA <-> ETRF2000
+## EOMA <-> ETRF2000
 
 **geoid_eht2014.gtx**
