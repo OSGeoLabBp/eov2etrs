@@ -17,7 +17,12 @@ között.
 Telepítés
 ---------
 
-A rácsfájlok bekerültek a proj 9.5.1 változatába és a hozzá tartozó proj_data 1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre, ezért érdemes a proj könyváturnkat frissíteni.
+A rácsfájlok bekerültek a proj 9.5.1 változatába és a hozzá tartozó proj_data 1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre, ezért érdemes a proj könyvátrunkat frissíteni.
+
+Használat a QGIS programban
+---------------------------
+
+A QGIS program 3.40-es válozata már a proj 9.5.1 verzióját használja, ezért a QGIS 3.40+ verzióiban az általunk elkészített és publikált rácshálók automatikusan bekerülnek. A projekt, illetve rétegek koordináta-rendszerét érdemes 10660 EPSG kódra állítani, és akkor az EOV vetületre végzett átszámítás cm-es pontossággal végezhető.
 
 Használat cs2cs segédprogramban
 -------------------------------
@@ -151,20 +156,6 @@ Például egy pontokat tartalmazó ESRI shape fájl átszámítását EOV-ból E
     ogr2ogr -s_srs "+proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs" -t_srs EPSG:4258 -f "ESRI Shapefile" etrs89.shp eov.shp
 
 Vigyázat, a parancsor végén először a cél állomány kell megadni és utána a forrás állományt!
-
-Használat a QGIS programban
----------------------------
-
-A QGIS program a vetületi definíciókat **srs.db** SQLite adatbázisban tárolja. 
-Az srs.db fájlt */usr/share/qgis/resources* könyvtárban találjuk a Linux rendszereken.
-Ezt módosíthatjuk az sqlite3 adatbázis kezelőben az alábbi SQL paranccsal::
-
-    UPDATE tbl_srs SET parameters='+proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs' WHERE srid=23700;
-   
-Emellett saját vetület létrehozása esetén nem kell az SQLite adatbázist 
-módosítani. Bár ilyenkor a 23700 EPSG kód helyett a saját vetület kódját kell használni,
-ami zavart okozhat. A Beállítások/Egyéni vetület menüpont biztosítja a saját vetület 
-bevitelét.
 
 Használat PostGIS programban
 ----------------------------
