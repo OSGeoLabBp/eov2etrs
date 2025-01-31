@@ -3,18 +3,18 @@ ETRF2000/ETRS89 <-> EOV/Balti átszámítás
 
 Az **ETRF2000/ETRS89** földrajzi koordináták (hosszúság és szélesség,
 ellipszoid feletti magasság) és az **EOV** koordináták, illetve **Balti**
-magasság közötti átszámítását kezdetben a legtöbb szoftver deciméter pontosan
-tudta csak elvégezni, mert az országosan egységes paraméterekkel végzett
-hasonlósági transzformáció ennyire pontos a klasszikus geodéziai 
+magasság közötti átszámítását kezdetben a legtöbb szoftver csak deciméter pontosan
+tudta elvégezni, mert az országosan egységes paraméterekkel végzett
+hasonlósági transzformáció ennyire pontos elsősorban a klasszikus geodéziai 
 alapponthálózatok kerethibái miatt. Az átszámítás pontosítása érdekében a PROJ
 programkönyvtár által 
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
 (PROJ segédprogram), az **ogr2ogr** (OGR segédprogram) és más PROJ könyvtárat
 használó térinformatikai programokkal is mint például **QGIS**, **PostGIS**.
-A javítórácsokat letöltheti a `GitHub oldalunkról 
+A javítórácsok letölthetők a `GitHub oldalunkról 
 <https://github.com/OSGeoLabBp/eov2etrs>`_, illetve a `PROJ projekt honlapjáról
-<https://proj.org/resource_files.html#hungary>` is.
-Emellett egy a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
+<https://github.com/OSGeo/PROJ-data/tree/master/hu_bme>` is.
+Emellett egy, a böngészőből is elérhető **WEB**-es szolgáltatást is létrehoztunk,
 mellyel egyesével vagy fájlban tárolt pontokat számíthatunk át a két rendszer 
 között.
 
@@ -22,7 +22,7 @@ Telepítés
 ---------
 
 A rácsfájlok bekerültek a PROJ 9.5.1 változatába és a hozzá tartozó PROJ-data
-1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre,s
+1.20 változatába. Innentől kezdve a rácshálók automatikusan települnek a gépre,
 ezért érdemes a PROJ könyvátrunkat frissíteni.
 
 A korábbi programváltozatokhoz lásd a régebbi leírást: 
