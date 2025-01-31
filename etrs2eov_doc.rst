@@ -34,7 +34,7 @@ Használat a QGIS programban
 A QGIS program 3.40.3-es és 3.34.15-ös válozata már a proj 9.5.1 verzióját használja, ezért
 ezekben a verziókban az általunk elkészített és publikált rácshálók
 automatikusan bekerülnek. A projekt, illetve rétegek koordináta-rendszerét
-érdemes 10660 EPSG kódra állítani, és akkor az EOV vetületre végzett átszámítás
+érdemes 10660 EPSG kódra (HD72/EOV + EOMA 1980 height) állítani, és akkor az EOV vetületre végzett átszámítás
 cm-es pontossággal végezhető.
 
 Használat cs2cs segédprogramban
@@ -159,19 +159,17 @@ vagy::
 Használat az ogr2ogr segédprogramban
 ------------------------------------
 
-**MÉG NEM AKTUALIZÁLT RÉSZ A ÚJ VÁLTOZATHOZ**
-
 Az **ogr2ogr** a GDAL/OGR könyvtárhoz készült segédprogramok egyike. 
 Segítségével különböző vektoros formátumok között alakíthatjuk át a 
 térinformatikai állományainkat és vetületi átszámítást is végrehajthatunk 
-közben. Sajnos az **ogr2ogr** program nem a proj.4 által használt vetületi 
-definíciót használja, hanem egy csv fájlt (**pcs.csv** illetve **gcs.csv**),
-mely eltérő formátumú is. Ebben nincs hely a javító rács megadására.
+közben. Itt nem csak pontokat, hanem törtvonalakat vagy felületeket 
+tartalmazó vektoros állomány átszámítását is elvégezhetjük.
 
-Szerencsére a vetületi definíciót az **ogr2ogr** a parancssorból is elfogadja. 
-Például egy pontokat tartalmazó ESRI shape fájl átszámítását EOV-ból ETRS89-re::
+A Windows felhasználók az *OSGeo4W Shell* elindítása után a parancssorból
+indíthatják el a segédprogramot.
+Például egy pontokat tartalmazó ESRI shape fájl átszámítását EOV-ból ETRF2000-re::
 
-    ogr2ogr -s_srs "+proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs" -t_srs EPSG:4258 -f "ESRI Shapefile" etrs89.shp eov.shp
+    ogr2ogr -s_srs EPSG:10660 +no_defs" -t_srs EPSG:7931 -f "ESRI Shapefile" etrf2000.shp eov.shp
 
 Vigyázat, a parancsor végén először a cél állomány kell megadni és utána a forrás állományt!
 
