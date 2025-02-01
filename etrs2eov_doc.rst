@@ -52,7 +52,7 @@ példák alapján végezhetjük::
 
 Eredményül a következőket fogjuk kapni::
 
-19.047447408    47.503933139 193.688921426
+    19.047447408    47.503933139 193.688921426
 
 Ellenkező irányban::
 
