@@ -172,13 +172,3 @@ Például egy pontokat tartalmazó ESRI shape fájl átszámítását EOV-ból E
     ogr2ogr -s_srs EPSG:10660 +no_defs" -t_srs EPSG:7931 -f "ESRI Shapefile" etrf2000.shp eov.shp
 
 Vigyázat, a parancsor végén először a cél állomány kell megadni és utána a forrás állományt!
-
-Használat PostGIS programban
-----------------------------
-
-**MÉG NEM AKTUALIZÁLT RÉSZ A ÚJ VÁLTOZATHOZ**
-
-A PostGIS a vetületi definíciókat a **spatial_ref_sys** táblában tárolja. 
-Ennek tartalmát kell aktualizálnunk az EOV vetületre::
-
-    UPDATE spatial_ref_sys SET proj4text='+proj=somerc +lat_0=47.14439372222222 +lon_0=19.04857177777778 +k_0=0.99993 +x_0=650000 +y_0=200000 +ellps=GRS67 +nadgrids=etrs2eov_notowgs.gsb +units=m +no_defs' WHERE srid=23700;
