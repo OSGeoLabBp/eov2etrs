@@ -5,7 +5,8 @@ Az **ETRF2000/ETRS89** földrajzi koordináták (hosszúság és szélesség,
 ellipszoid feletti magasság) és az **EOV** koordináták, illetve **Balti**
 magasság közötti átszámítását kezdetben a legtöbb szoftver csak deciméter pontosan
 tudta elvégezni, mert az országosan egységes paraméterekkel végzett
-hasonlósági transzformáció ennyire pontos elsősorban a klasszikus geodéziai 
+hasonlósági transzformáció paramétereit csak korlátozott pontossággal lehet meghatározni, 
+elsősorban a klasszikus geodéziai 
 alapponthálózatok kerethibái miatt. Az átszámítás pontosítása érdekében a PROJ
 programkönyvtár által 
 használható javító rácsokat hoztunk létre. A javító rács használható a **cs2cs**
