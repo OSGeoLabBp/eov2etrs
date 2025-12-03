@@ -67,10 +67,10 @@ function single($e, $n, $h) {
 	fclose($f);
 	if ($e < 100) {
 		# lambda, fi -> EOVY, EOVX
-		@$res = shell_exec("/usr/bin/cs2cs +init=epsg:4258 +to +init=epsg:23700 < $fn");
+		@$res = shell_exec("/usr/bin/cs2cs --3d +init=epsg:4258 +to +init=epsg:23700 +nadgrids=hu_bme_hd72corr.tif +geoidgrids=hu_bme_geoid2014.tif < $fn");
 	} else {
 		#EOVY, EOVX -> lambda, fi
-		@$res = shell_exec("/usr/bin/cs2cs -f \"%.7f\" +init=epsg:23700 +to +init=epsg:4258 < $fn");
+		@$res = shell_exec("/usr/bin/cs2cs --3d -f \"%.7f\" +init=epsg:23700 +nadgrids=hu_bme_hd72corr.tif +geoidgrids=hu_bme_geoid2014.tif +to +init=epsg:4258 < $fn");
 	}
 	# remove temperary file
 	@unlink($fn);
