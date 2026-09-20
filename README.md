@@ -22,6 +22,12 @@ On-line test page: http://www.agt.bme.hu/on_line/etrs2eov/ (Hungarian).
 
 Documentation: https://github.com/OSGeoLabBp/eov2etrs/blob/master/etrs2eov_doc.rst (Hungarian)
 
+# for ArcGISPro Users
+
+**ArcGISPro** folder
+
+See README
+
 # Obsolate grids
 
 These grids are useable also. It is not recomended to use them above proj 9.5.1.
